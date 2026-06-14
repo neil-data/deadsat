@@ -43,7 +43,7 @@ from real_data_fetcher import RealDataFetcher, NOAA_18_ID
 
 # N2YO API key — set via env var or hardcode after registering at n2yo.com
 N2YO_API_KEY  = os.environ.get("N2YO_API_KEY", "")
-TARGET_NORAD  = int(os.environ.get("TARGET_NORAD", str(NOAA_18_ID)))
+TARGET_NORAD  = int(os.environ.get("TARGET_NORAD", "57166"))  # Meteor-M2-3 default
 
 
 # ──────────────────────────────────────────────
@@ -393,7 +393,7 @@ async def sign_command(req: SignCommandRequest):
     import httpx as _httpx
     try:
         resp = _httpx.post(
-            "http://localhost:8001/sign",
+            "http://10.36.220.90:8001/sign",
             json={"command_bytes": req.command_bytes},
             timeout=5.0
         )
@@ -465,7 +465,7 @@ async def crypto_status():
     """Check if CY-1 Dilithium signing service is live."""
     import httpx as _httpx
     try:
-        resp = _httpx.get("http://localhost:8001/health", timeout=2.0)
+        resp = _httpx.get("http://10.36.220.90:8001/health", timeout=2.0)
         resp.raise_for_status()
         return {"cy1_online": True, "mode": "dilithium_pqc", "endpoint": "http://localhost:8001"}
     except Exception:

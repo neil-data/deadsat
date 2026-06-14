@@ -27,9 +27,9 @@ Live Telemetry → Anomaly Detection → Fault Classification → Recovery Plann
 │                  Raspberry Pi 4 #1                  │
 │                                                     │
 │  ┌──────────┐    ┌──────────┐    ┌───────────────┐  │
-│  │ Satellite│───▶│ FastAPI  │───▶│  LangGraph   │  │
+│  │ Satellite│───▶│ FastAPI  │───▶│  LangGraph    │  │
 │  │ Emulator │    │  :8000   │    │ Recovery Agent│  │
-│  │ (AI-2)   │◀───│          │◀───│    (AI-2)    │  │
+│  │ (AI-2)   │◀───│          │◀───│    (AI-2)     │  │
 │  └──────────┘    └──────────┘    └───────────────┘  │
 │       │               │                  │          │
 │       │          ┌────▼────┐    ┌────────▼──────┐   │
@@ -294,7 +294,9 @@ Derived features: `ECC_DELTA, REV_DELTA, TLE_AGE_HOURS, BSTAR_ANOMALY, MEAN_MOTI
 
 **Pi 4 #1** — FastAPI + emulator + classifier + LangGraph agent + signing service (4GB RAM)
 
-**Pi 4 #2** — RTL-SDR receiver, live satellite signals on 137 MHz NOAA band
+**Pi 4 #2** — RTL-SDR receiver, Meteor-M2-3/4 LRPT on 137.900 MHz
+
+> Note: NOAA-18 decommissioned June 2025 — switched to Meteor-M2-3 (engineering decision)
 
 **Demo screens** — React dashboard on projector | terminal logs on Pi #1 | RF spectrum on Pi #2
 

@@ -35,7 +35,7 @@ except ImportError:
 import sys
 sys.path.append(str(Path(__file__).parent.parent / "emulator"))
 from satellite_emulator import SatelliteEmulator, FaultType
-from contact_calculator import ContactCalculator
+from contact_calculator import ContactCalculator  # type: ignore
 
 
 # ──────────────────────────────────────────────
@@ -57,7 +57,7 @@ def _find_procedure_library() -> Path:
     return candidates[0]  # fallback
 
 PROCEDURE_LIBRARY_PATH = _find_procedure_library()
-SIGNING_ENDPOINT       = "http://localhost:8000/crypto/sign"
+SIGNING_ENDPOINT       = "http://10.36.220.90:8001/sign"
 FASTAPI_BASE           = "http://localhost:8000"
 POLL_INTERVAL_S        = 1.0
 MAX_POLL_ATTEMPTS      = 30
@@ -66,8 +66,8 @@ MAX_POLL_ATTEMPTS      = 30
 LOG_DIR = Path(__file__).parent.parent / "recovery_logs"
 LOG_DIR.mkdir(exist_ok=True)
 
-# Default NORAD ID (can be overridden in fault_report)
-DEFAULT_NORAD_ID = 28654
+# Default NORAD ID — Meteor-M2-3 (NOAA-18 decommissioned June 2025)
+DEFAULT_NORAD_ID = 57166  # Meteor-M2-3, active 137.900 MHz
 
 
 # ──────────────────────────────────────────────
@@ -677,7 +677,7 @@ if __name__ == "__main__":
         "fault_detail": frame["fault_detail"],
         "telemetry_frame": frame,
         "confidence":   0.95,
-        "norad_id":     28654,
+        "norad_id":     57166,  # Meteor-M2-3
     }
 
     agent  = RecoveryAgent(emulator)
